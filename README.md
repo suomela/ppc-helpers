@@ -7,4 +7,4 @@ get-load
 Run on kosh, shows all Maari-A/C computers with no users,
 ordered by their CPU load. Example:
 
-  ppc-helpers/get-load
+    ppc-helpers/get-load
