@@ -12,3 +12,9 @@ Run on kosh, shows all Maari-A/C computers with no users,
 ordered by their CPU load. Example:
 
     ppc-helpers/get-load
+
+If you have difficulties accessing Maari computers from kosh,
+try to renew your Kerberos tickets first:
+
+    kinit
+
