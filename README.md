@@ -13,6 +13,10 @@ ordered by their CPU load. Example:
 
     ppc-helpers/get-load
 
+If you want to see all computers and their users, try:
+
+    ppc-helpers/get-load-all
+
 If you have difficulties accessing Maari computers from kosh,
 try to renew your Kerberos tickets first:
 
