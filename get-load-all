@@ -1,6 +1,6 @@
 #!/bin/sh
 
-parallel -i -j100 ssh -oBatchMode=yes -oConnectTimeout=2 {} 'l="$(cut -d" " -f1-3 /proc/loadavg)"; g="$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader)"; u="$(users | tr " " "\n" | sort -u | tr "\n" " " | sed "s, *$,," | sed "s,\(..*\),(\1),")"; printf "%-15s  [GPU:%6s]  %-15s %s\n" "$l" "$g" "{}" "$u"' -- \
+parallel -i -j100 ssh -oBatchMode=yes -oConnectTimeout=2 {} 'l="$(cut -d" " -f1-3 /proc/loadavg)"; g="$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader)"; u="$(users | tr " " "\n" | sort -u | tr "\n" " " | sed "s, *$,," | sed "s,\(..*\),(\1),")"; t="$(who | egrep -c "\<tty[0-9]\>" | tr "01" " *")"; printf "%-17s [GPU:%6s]  %1s  %-15s %1s\n" "$l" "$g" "$t" "{}" "$u"' -- \
   albatrossi broileri dodo drontti emu fasaani flamingo iibis kakadu kalkkuna karakara kasuaari kiuru kiwi kolibri \
   kondori kookaburra koskelo kuukkeli lunni moa pelikaani pitohui pulu ruokki siira strutsi suula tavi tukaani undulaatti \
   akaatti akvamariini ametisti baryytti berylli fluoriitti granaatti hypersteeni jade jaspis karneoli korundi kuukivi malakiitti meripihka \
