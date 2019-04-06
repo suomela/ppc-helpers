@@ -8,7 +8,7 @@ http://ppc.cs.aalto.fi/
 get-load
 --------
 
-Run on kosh, shows all Maari-A/C computers with no users,
+Run on kosh, shows all Maari-A/B computers with no users,
 ordered by their CPU load. Example:
 
     ppc-helpers/get-load
