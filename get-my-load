@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+systemload="$(cut -d" " -f1 /proc/loadavg)"
+users="$(users | tr " " "\n" | sort -u | tr "\n" " " | sed "s, *$,,")"
+
+if [ "$1" = "--skip-if-users" -a -n "$users" ]; then
+    exit 0
+fi
+
+cpuload="$(mpstat -o JSON 1 1 | jq '100 - .sysstat.hosts[0].statistics[0]."cpu-load"[0].idle')"
+gpuload="$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | cut -d" " -f1)"
+hostname="$(hostname)"
+bold="$(tput -Txterm bold)"
+nobold="$(tput -Txterm sgr0)"
+printf "%3.0f%% CPU  %3.0f%% GPU  %5.1f load  $bold%-15s$nobold  %s\n" "$cpuload" "$gpuload" "$systemload" "$hostname" "$users"

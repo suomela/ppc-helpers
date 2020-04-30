@@ -1,12 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-parallel -i -j100 ssh -oBatchMode=yes -oConnectTimeout=2 {} 'test -z "$(users)" && echo $(cut -d" " -f1-3 /proc/loadavg) {}' -- \
-  albatrossi broileri dodo drontti emu fasaani flamingo iibis kakadu \
-  kalkkuna karakara kasuaari kiuru kiwi kolibri kondori kookaburra \
-  koskelo kuikka lunni moa pelikaani piekana pulu ruokki sorsa strutsi \
-  suula tavi tukaani undulaatti akaatti akvamariini ametisti baryytti \
-  berylli dioptaasi fluoriitti granaatti hypersteeni jade jaspis karneoli \
-  korundi kuukivi lapislatsuli malakiitti meripihka opaali peridootti \
-  rubiini safiiri sitriini smaragdi spektroliitti spinelli timantti \
-  topaasi turkoosi turmaliini vuorikide zirkoni \
-  | sort -n
+$HOME/ppc-helpers/get-load-all "--skip-if-users"
