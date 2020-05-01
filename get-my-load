@@ -11,7 +11,12 @@ fi
 
 cpuload="$(mpstat -o JSON 1 1 | jq '100 - .sysstat.hosts[0].statistics[0]."cpu-load"[0].idle')"
 gpuload="$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | cut -d" " -f1)"
+if [ "$gpuload" = "Failed" ]; then
+    gpuload="???"
+else
+    gpuload="$(printf "%3.0f" "$gpuload")"
+fi
 hostname="$(hostname)"
 bold="$(tput -Txterm bold)"
 nobold="$(tput -Txterm sgr0)"
-printf "%3.0f%% CPU  %3.0f%% GPU  %5.1f load  $bold%-15s$nobold  %s\n" "$cpuload" "$gpuload" "$systemload" "$hostname" "$users"
+printf "%3.0f%% CPU  %s%% GPU  %5.1f load  $bold%-15s$nobold  %s\n" "$cpuload" "$gpuload" "$systemload" "$hostname" "$users"
